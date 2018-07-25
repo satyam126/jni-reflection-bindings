@@ -137,4 +137,24 @@ class JNIReflectionTest {
         );
     }
 
+    @Test
+    void setStaticShort() {
+        JNIReflection.setStaticShort((short) 13, className, "staticShort", "S");
+        assertThat(TestObject.staticShort).isEqualTo((short) 13);
+    }
+
+    @Test
+    void setStaticShortClassNotFound() {
+        assertThatExceptionOfType(ClassNotFoundError.class).isThrownBy(
+                () -> JNIReflection.setStaticShort((short) 13, "invalidClass", "staticShort", "S")
+        );
+    }
+
+    @Test
+    void setStaticShortFieldNotFound() {
+        assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
+                () -> JNIReflection.setStaticShort((short) 19, className, "invalidField", "S")
+        );
+    }
+
 }
