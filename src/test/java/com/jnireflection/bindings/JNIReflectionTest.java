@@ -96,4 +96,24 @@ public class JNIReflectionTest {
         );
     }
 
+    @Test
+    void setStaticByte() {
+        JNIReflection.setStaticByte((byte) 19, className, "staticByte", "B");
+        assertThat(TestObject.staticByte).isEqualTo((byte) 19);
+    }
+
+    @Test
+    void setStaticByteClassNotFound() {
+        assertThatExceptionOfType(ClassNotFoundError.class).isThrownBy(
+                () -> JNIReflection.setStaticByte((byte) 19, "invalidClass", "staticByte", "B")
+        );
+    }
+
+    @Test
+    void setStaticByteFieldNotFound() {
+        assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
+                () -> JNIReflection.setStaticByte((byte) 19, className, "invalidField", "B")
+        );
+    }
+
 }
