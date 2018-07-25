@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class JNIReflectionTest {
+class JNIReflectionTest {
 
     private static String className;
     private TestObject testObject;
@@ -21,7 +21,7 @@ public class JNIReflectionTest {
     }
 
     @BeforeEach
-    void initialize() {
+    void initializeObject() {
         testObject = new TestObject();
         TestObject.staticByte = 0;
         TestObject.staticShort = 0;
@@ -113,6 +113,27 @@ public class JNIReflectionTest {
     void setStaticByteFieldNotFound() {
         assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
                 () -> JNIReflection.setStaticByte((byte) 19, className, "invalidField", "B")
+        );
+    }
+
+    @Test
+    void getStaticShort() {
+        TestObject.staticShort = 13;
+        short readShort = JNIReflection.getStaticShort(className, "staticShort", "S");
+        assertThat(readShort).isEqualTo((short) 13);
+    }
+
+    @Test
+    void getStaticShortClassNotFound() {
+        assertThatExceptionOfType(ClassNotFoundError.class).isThrownBy(
+                () -> JNIReflection.getStaticShort("invalidClass", "staticShort", "S")
+        );
+    }
+
+    @Test
+    void getStaticShortFieldNotFound() {
+        assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
+                () -> JNIReflection.getStaticShort(className, "invalidField", "S")
         );
     }
 
