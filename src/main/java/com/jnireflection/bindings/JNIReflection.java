@@ -28,7 +28,7 @@ public class JNIReflection {
 
     public static native int getStaticInt(String className, String fieldName, String signature);
 
-    public static native void setStaticInt(byte newInt, String className, String fieldName, String signature);
+    public static native void setStaticInt(int newInt, String className, String fieldName, String signature);
 
     public static native long getStaticLong(String className, String fieldName, String signature);
 
