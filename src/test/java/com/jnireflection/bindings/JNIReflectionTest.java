@@ -85,4 +85,17 @@ class JNIReflectionTest extends AbstractJNIReflectionTest {
         assertThat(TestObject.staticFloat).isEqualTo(3.14f);
     }
 
+    @Test
+    void getStaticDouble() {
+        TestObject.staticDouble = 2.71828;
+        double readDouble = JNIReflection.getStaticDouble(getClassName(), "staticDouble", "D");
+        assertThat(readDouble).isEqualTo(2.71828);
+    }
+
+    @Test
+    void setStaticDouble() {
+        JNIReflection.setStaticDouble(2.71828, getClassName(), "staticDouble", "D");
+        assertThat(TestObject.staticDouble).isEqualTo(2.71828);
+    }
+
 }
