@@ -106,4 +106,18 @@ class ErrorTest extends AbstractJNIReflectionTest {
         );
     }
 
+    @Test
+    void setStaticIntClassNotFound() {
+        assertThatExceptionOfType(ClassNotFoundError.class).isThrownBy(
+                () -> JNIReflection.setStaticInt(11, "invalidClass", "staticInt", "I")
+        );
+    }
+
+    @Test
+    void setStaticIntFieldNotFound() {
+        assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
+                () -> JNIReflection.setStaticInt(11, getClassName(), "invalidField", "I")
+        );
+    }
+
 }

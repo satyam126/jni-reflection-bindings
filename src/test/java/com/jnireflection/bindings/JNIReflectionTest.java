@@ -53,4 +53,10 @@ class JNIReflectionTest extends AbstractJNIReflectionTest {
         assertThat(readInt).isEqualTo(11);
     }
 
+    @Test
+    void setStaticInt() {
+        JNIReflection.setStaticInt(11, getClassName(), "staticInt", "I");
+        assertThat(TestObject.staticInt).isEqualTo(11);
+    }
+
 }
