@@ -36,9 +36,9 @@ public class JNIReflection {
 
     public static native float getStaticFloat(String className, String fieldName, String signature);
 
-    public static native void setStaticFloat(byte newFloat, String className, String fieldName, String signature);
+    public static native void setStaticFloat(float newFloat, String className, String fieldName, String signature);
 
-    public static native byte getStaticDouble(String className, String fieldName, String signature);
+    public static native double getStaticDouble(String className, String fieldName, String signature);
 
     public static native void setStaticDouble(double newDouble, String className, String fieldName, String signature);
 

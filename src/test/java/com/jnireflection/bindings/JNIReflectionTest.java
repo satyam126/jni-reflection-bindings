@@ -72,4 +72,17 @@ class JNIReflectionTest extends AbstractJNIReflectionTest {
         assertThat(TestObject.staticLong).isEqualTo(1173);
     }
 
+    @Test
+    void getStaticFloat() {
+        TestObject.staticFloat = 3.14f;
+        float readFloat = JNIReflection.getStaticFloat(getClassName(), "staticFloat", "F");
+        assertThat(readFloat).isEqualTo(3.14f);
+    }
+
+    @Test
+    void setStaticFloat() {
+        JNIReflection.setStaticFloat(3.14f, getClassName(), "staticFloat", "F");
+        assertThat(TestObject.staticFloat).isEqualTo(3.14f);
+    }
+
 }
