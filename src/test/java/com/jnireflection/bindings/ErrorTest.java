@@ -29,4 +29,25 @@ class ErrorTest extends AbstractJNIReflectionTest {
         );
     }
 
+    @Test
+    void getInstanceObjectInvalidObject() {
+        assertThatExceptionOfType(NullPointerException.class).isThrownBy(
+                () -> JNIReflection.getInstanceObject(null, "instanceString", "Ljava/lang/String;")
+        );
+    }
+
+    @Test
+    void getInstanceObjectInvalidFieldName() {
+        assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
+                () -> JNIReflection.getInstanceObject(getTestObject(), "invalidField", "Ljava/lang/String;")
+        );
+    }
+
+    @Test
+    void getInstanceObjectInvalidType() {
+        assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
+                () -> JNIReflection.getInstanceObject(getTestObject(), "instanceString", "I")
+        );
+    }
+
 }

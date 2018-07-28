@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class JNIReflectionTest extends AbstractJNIReflectionTest {
+class AccessorTest extends AbstractJNIReflectionTest {
 
     @Test
     void getStaticObject() {
