@@ -2,159 +2,58 @@ package com.jnireflection.bindings;
 
 import com.jnireflection.bindings.errors.ClassNotFoundError;
 import com.jnireflection.bindings.errors.FieldNotFoundError;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-class JNIReflectionTest {
-
-    private static String className;
-    private TestObject testObject;
-
-    @BeforeAll
-    static void initializeLibrary() {
-        JNIReflection.loadLibrary();
-        className = TestObject.class.getName().replace(".", "/");
-    }
-
-    @BeforeEach
-    void initializeObject() {
-        testObject = new TestObject();
-        TestObject.staticByte = 0;
-        TestObject.staticShort = 0;
-        TestObject.staticInt = 0;
-        TestObject.staticLong = 0;
-        TestObject.staticFloat = 0;
-        TestObject.staticDouble = 0;
-        TestObject.staticBoolean = false;
-        TestObject.staticChar = 0;
-        TestObject.staticString = null;
-    }
+class JNIReflectionTest extends AbstractJNIReflectionTest {
 
     @Test
     void getStaticObject() {
         TestObject.staticString = "some text";
-        String readString = (String) JNIReflection.getStaticObject(className, "staticString", "Ljava/lang/String;");
+        String readString = (String) JNIReflection.getStaticObject(getClassName(), "staticString",
+                "Ljava/lang/String;");
         assertThat(readString).isEqualTo("some text");
     }
 
     @Test
-    void getStaticObjectClassNotFound() {
-        assertThatExceptionOfType(ClassNotFoundError.class).isThrownBy(
-                () -> JNIReflection.getStaticObject("invalidClass", "staticString", "Ljava/lang/String;")
-        );
-    }
-
-    @Test
-    void getStaticObjectFieldNotFound() {
-        assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
-                () -> JNIReflection.getStaticObject(className, "invalidField", "Ljava/lang/String;")
-        );
-    }
-
-    @Test
     void setStaticObject() {
-        JNIReflection.setStaticObject("some new text", className, "staticString", "Ljava/lang/String;");
+        JNIReflection.setStaticObject("some new text", getClassName(), "staticString", "Ljava/lang/String;");
         assertThat(TestObject.staticString).isEqualTo("some new text");
-    }
-
-    @Test
-    void setStaticObjectClassNotFound() {
-        assertThatExceptionOfType(ClassNotFoundError.class).isThrownBy(
-                () -> JNIReflection.setStaticObject("text", "invalidClass", "staticString", "Ljava/lang/String;")
-        );
-    }
-
-    @Test
-    void setStaticObjectFieldNotFound() {
-        assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
-                () -> JNIReflection.setStaticObject("text", className, "invalidField", "Ljava/lang/String;")
-        );
     }
 
     @Test
     void getStaticByte() {
         TestObject.staticByte = 17;
-        byte readByte = JNIReflection.getStaticByte(className, "staticByte", "B");
+        byte readByte = JNIReflection.getStaticByte(getClassName(), "staticByte", "B");
         assertThat(readByte).isEqualTo((byte) 17);
     }
 
     @Test
-    void getStaticByteClassNotFound() {
-        assertThatExceptionOfType(ClassNotFoundError.class).isThrownBy(
-                () -> JNIReflection.getStaticByte("invalidClass", "staticByte", "B")
-        );
-    }
-
-    @Test
-    void getStaticByteFieldNotFound() {
-        assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
-                () -> JNIReflection.getStaticByte(className, "invalidField", "B")
-        );
-    }
-
-    @Test
     void setStaticByte() {
-        JNIReflection.setStaticByte((byte) 19, className, "staticByte", "B");
+        JNIReflection.setStaticByte((byte) 19, getClassName(), "staticByte", "B");
         assertThat(TestObject.staticByte).isEqualTo((byte) 19);
-    }
-
-    @Test
-    void setStaticByteClassNotFound() {
-        assertThatExceptionOfType(ClassNotFoundError.class).isThrownBy(
-                () -> JNIReflection.setStaticByte((byte) 19, "invalidClass", "staticByte", "B")
-        );
-    }
-
-    @Test
-    void setStaticByteFieldNotFound() {
-        assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
-                () -> JNIReflection.setStaticByte((byte) 19, className, "invalidField", "B")
-        );
     }
 
     @Test
     void getStaticShort() {
         TestObject.staticShort = 13;
-        short readShort = JNIReflection.getStaticShort(className, "staticShort", "S");
+        short readShort = JNIReflection.getStaticShort(getClassName(), "staticShort", "S");
         assertThat(readShort).isEqualTo((short) 13);
     }
 
     @Test
-    void getStaticShortClassNotFound() {
-        assertThatExceptionOfType(ClassNotFoundError.class).isThrownBy(
-                () -> JNIReflection.getStaticShort("invalidClass", "staticShort", "S")
-        );
-    }
-
-    @Test
-    void getStaticShortFieldNotFound() {
-        assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
-                () -> JNIReflection.getStaticShort(className, "invalidField", "S")
-        );
-    }
-
-    @Test
     void setStaticShort() {
-        JNIReflection.setStaticShort((short) 13, className, "staticShort", "S");
+        JNIReflection.setStaticShort((short) 13, getClassName(), "staticShort", "S");
         assertThat(TestObject.staticShort).isEqualTo((short) 13);
     }
 
     @Test
-    void setStaticShortClassNotFound() {
-        assertThatExceptionOfType(ClassNotFoundError.class).isThrownBy(
-                () -> JNIReflection.setStaticShort((short) 13, "invalidClass", "staticShort", "S")
-        );
-    }
-
-    @Test
-    void setStaticShortFieldNotFound() {
-        assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
-                () -> JNIReflection.setStaticShort((short) 19, className, "invalidField", "S")
-        );
+    void getStaticInt() {
+        TestObject.staticInt = 11;
+        int readInt = JNIReflection.getStaticInt(getClassName(), "staticInt", "I");
+        assertThat(readInt).isEqualTo(11);
     }
 
 }
