@@ -111,4 +111,17 @@ class JNIReflectionTest extends AbstractJNIReflectionTest {
         assertThat(TestObject.staticBoolean).isTrue();
     }
 
+    @Test
+    void getStaticChar() {
+        TestObject.staticChar = 'c';
+        char readChar = JNIReflection.getStaticChar(getClassName(), "staticChar", "C");
+        assertThat(readChar).isEqualTo('c');
+    }
+
+    @Test
+    void setStaticChar() {
+        JNIReflection.setStaticChar('c', getClassName(), "staticChar", "C");
+        assertThat(TestObject.staticChar).isEqualTo('c');
+    }
+
 }
