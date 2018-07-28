@@ -59,4 +59,17 @@ class JNIReflectionTest extends AbstractJNIReflectionTest {
         assertThat(TestObject.staticInt).isEqualTo(11);
     }
 
+    @Test
+    void getStaticLong() {
+        TestObject.staticLong = 1173;
+        long readLong = JNIReflection.getStaticLong(getClassName(), "staticLong", "J");
+        assertThat(readLong).isEqualTo(1173);
+    }
+
+    @Test
+    void setStaticLong() {
+        JNIReflection.setStaticLong(1173, getClassName(), "staticLong", "J");
+        assertThat(TestObject.staticLong).isEqualTo(1173);
+    }
+
 }
