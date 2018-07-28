@@ -138,4 +138,17 @@ class AccessorTest extends AbstractJNIReflectionTest {
         assertThat(getTestObject().getInstanceString()).isEqualTo("some text");
     }
 
+    @Test
+    void getInstanceByte() {
+        getTestObject().setInstanceByte((byte) 17);
+        byte readByte = JNIReflection.getInstanceByte(getTestObject(), "instanceByte", "B");
+        assertThat(readByte).isEqualTo((byte) 17);
+    }
+
+    @Test
+    void setInstanceByte() {
+        JNIReflection.setInstanceByte((byte) 17, getTestObject(), "instanceByte", "B");
+        assertThat(getTestObject().getInstanceByte()).isEqualTo((byte) 17);
+    }
+
 }
