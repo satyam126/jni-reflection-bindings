@@ -124,4 +124,18 @@ class JNIReflectionTest extends AbstractJNIReflectionTest {
         assertThat(TestObject.staticChar).isEqualTo('c');
     }
 
+    @Test
+    void getInstanceObject() {
+        getTestObject().setInstanceString("some text");
+        String readString = (String) JNIReflection.getInstanceObject(getTestObject(), "instanceString",
+                "Ljava/lang/String;");
+        assertThat(readString).isEqualTo("some text");
+    }
+
+    @Test
+    void setInstanceObject() {
+        JNIReflection.setInstanceObject(getTestObject(), "instanceString", "Ljava/lang/String;", "some text");
+        assertThat(getTestObject().getInstanceString()).isEqualTo("some text");
+    }
+
 }

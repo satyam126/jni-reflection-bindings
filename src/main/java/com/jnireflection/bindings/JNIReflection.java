@@ -51,9 +51,9 @@ public class JNIReflection {
 
     public static native void setStaticChar(char newChar, String className, String fieldName, String signature);
 
-    public static native Object getObject(String className, String fieldName, String signature);
+    public static native Object getInstanceObject(Object instance, String fieldName, String signature);
 
-    public static native Object setObject(Object object, String className, String fieldName, String signature);
+    public static native void setInstanceObject(Object instance,String fieldName, String signature, Object newObject);
 
     public static native Object[] getInstances(String className);
 
