@@ -98,4 +98,17 @@ class JNIReflectionTest extends AbstractJNIReflectionTest {
         assertThat(TestObject.staticDouble).isEqualTo(2.71828);
     }
 
+    @Test
+    void getStaticBoolean() {
+        TestObject.staticBoolean = true;
+        boolean readBoolean = JNIReflection.getStaticBoolean(getClassName(), "staticBoolean", "Z");
+        assertThat(readBoolean).isTrue();
+    }
+
+    @Test
+    void setStaticBoolean() {
+        JNIReflection.setStaticBoolean(true, getClassName(), "staticBoolean", "Z");
+        assertThat(TestObject.staticBoolean).isTrue();
+    }
+
 }
