@@ -134,7 +134,7 @@ class JNIReflectionTest extends AbstractJNIReflectionTest {
 
     @Test
     void setInstanceObject() {
-        JNIReflection.setInstanceObject(getTestObject(), "instanceString", "Ljava/lang/String;", "some text");
+        JNIReflection.setInstanceObject("some text", getTestObject(), "instanceString", "Ljava/lang/String;");
         assertThat(getTestObject().getInstanceString()).isEqualTo("some text");
     }
 

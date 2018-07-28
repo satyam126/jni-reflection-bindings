@@ -53,7 +53,40 @@ public class JNIReflection {
 
     public static native Object getInstanceObject(Object instance, String fieldName, String signature);
 
-    public static native void setInstanceObject(Object instance,String fieldName, String signature, Object newObject);
+    public static native void setInstanceObject(Object newObject, Object instance,String fieldName, String signature);
+
+    public static native byte getInstanceByte(Object instance, String fieldName, String signature);
+
+    public static native void setInstanceByte(byte newByte, Object instance,String fieldName, String signature);
+
+    public static native short getInstanceShort(Object instance, String fieldName, String signature);
+
+    public static native void setInstanceShort(short newShort, Object instance, String fieldName, String signature);
+
+    public static native int getInstanceInt(Object instance, String fieldName, String signature);
+
+    public static native void setInstanceInt(int newInt, Object instance, String fieldName, String signature);
+
+    public static native long getInstanceLong(Object instance, String fieldName, String signature);
+
+    public static native void setInstanceLong(long newLong, Object instance, String fieldName, String signature);
+
+    public static native float getInstanceFloat(Object instance, String fieldName, String signature);
+
+    public static native void setInstanceloat(float newFloat, Object instance, String fieldName, String signature);
+
+    public static native double getInstanceDouble(Object instance, String fieldName, String signature);
+
+    public static native void setInstanceDouble(double newDouble, Object instance, String fieldName, String signature);
+
+    public static native boolean getInstanceBoolean(Object instance, String fieldName, String signature);
+
+    public static native void setInstanceBoolean(boolean newBoolean, Object instance, String fieldName, String
+            signature);
+
+    public static native char getInstanceChar(Object instance, String fieldName, String signature);
+
+    public static native void setInstanceChar(char newChar, Object instance, String fieldName, String signature);
 
     public static native Object[] getInstances(String className);
 
