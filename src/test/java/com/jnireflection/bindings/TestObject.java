@@ -1,16 +1,16 @@
 package com.jnireflection.bindings;
 
-public class TestObject {
+class TestObject {
 
-    public static String staticString;
-    public static byte staticByte;
-    public static short staticShort;
-    public static int staticInt;
-    public static long staticLong;
-    public static float staticFloat;
-    public static double staticDouble;
-    public static boolean staticBoolean;
-    public static char staticChar;
+    static String staticString;
+    static byte staticByte;
+    static short staticShort;
+    static int staticInt;
+    static long staticLong;
+    static float staticFloat;
+    static double staticDouble;
+    static boolean staticBoolean;
+    static char staticChar;
 
     private String instanceString;
     private byte instanceByte;
@@ -23,83 +23,83 @@ public class TestObject {
     private char instanceChar;
     private int[] instanceArray;
 
-    public String getInstanceString() {
+    String getInstanceString() {
         return instanceString;
     }
 
-    public void setInstanceString(String instanceString) {
+    void setInstanceString(String instanceString) {
         this.instanceString = instanceString;
     }
 
-    public byte getInstanceByte() {
+    byte getInstanceByte() {
         return instanceByte;
     }
 
-    public void setInstanceByte(byte instanceByte) {
+    void setInstanceByte(byte instanceByte) {
         this.instanceByte = instanceByte;
     }
 
-    public short getInstanceShort() {
+    short getInstanceShort() {
         return instanceShort;
     }
 
-    public void setInstanceShort(short instanceShort) {
+    void setInstanceShort(short instanceShort) {
         this.instanceShort = instanceShort;
     }
 
-    public int getInstanceInt() {
+    int getInstanceInt() {
         return instanceInt;
     }
 
-    public void setInstanceInt(int instanceInt) {
+    void setInstanceInt(int instanceInt) {
         this.instanceInt = instanceInt;
     }
 
-    public long getInstanceLong() {
+    long getInstanceLong() {
         return instanceLong;
     }
 
-    public void setInstanceLong(long instanceLong) {
+    void setInstanceLong(long instanceLong) {
         this.instanceLong = instanceLong;
     }
 
-    public float getInstanceFloat() {
+    float getInstanceFloat() {
         return instanceFloat;
     }
 
-    public void setInstanceFloat(float instanceFloat) {
+    void setInstanceFloat(float instanceFloat) {
         this.instanceFloat = instanceFloat;
     }
 
-    public double getInstanceDouble() {
+    double getInstanceDouble() {
         return instanceDouble;
     }
 
-    public void setInstanceDouble(double instanceDouble) {
+    void setInstanceDouble(double instanceDouble) {
         this.instanceDouble = instanceDouble;
     }
 
-    public boolean isInstanceBoolean() {
+    boolean isInstanceBoolean() {
         return instanceBoolean;
     }
 
-    public void setInstanceBoolean(boolean instanceBoolean) {
+    void setInstanceBoolean(boolean instanceBoolean) {
         this.instanceBoolean = instanceBoolean;
     }
 
-    public char getInstanceChar() {
+    char getInstanceChar() {
         return instanceChar;
     }
 
-    public void setInstanceChar(char instanceChar) {
+    void setInstanceChar(char instanceChar) {
         this.instanceChar = instanceChar;
     }
 
-    public int[] getInstanceArray() {
+    int[] getInstanceArray() {
         return instanceArray;
     }
 
-    public void setInstanceArray(int[] instanceArray) {
+    void setInstanceArray(int[] instanceArray) {
         this.instanceArray = instanceArray;
     }
 
