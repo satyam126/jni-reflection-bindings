@@ -22,80 +22,80 @@ class AccessorTest extends AbstractJNIReflectionTest {
 
     @Test
     void getStaticByte() {
-        TestObject.staticByte = 17;
+        TestObject.staticByte = Byte.MAX_VALUE;
         byte readByte = JNIReflection.getStaticByte(getClassName(), "staticByte", "B");
-        assertThat(readByte).isEqualTo((byte) 17);
+        assertThat(readByte).isEqualTo(Byte.MAX_VALUE);
     }
 
     @Test
     void setStaticByte() {
-        JNIReflection.setStaticByte((byte) 19, getClassName(), "staticByte", "B");
-        assertThat(TestObject.staticByte).isEqualTo((byte) 19);
+        JNIReflection.setStaticByte(Byte.MAX_VALUE, getClassName(), "staticByte", "B");
+        assertThat(TestObject.staticByte).isEqualTo(Byte.MAX_VALUE);
     }
 
     @Test
     void getStaticShort() {
-        TestObject.staticShort = 13;
+        TestObject.staticShort = Short.MAX_VALUE;
         short readShort = JNIReflection.getStaticShort(getClassName(), "staticShort", "S");
-        assertThat(readShort).isEqualTo((short) 13);
+        assertThat(readShort).isEqualTo(Short.MAX_VALUE);
     }
 
     @Test
     void setStaticShort() {
-        JNIReflection.setStaticShort((short) 13, getClassName(), "staticShort", "S");
-        assertThat(TestObject.staticShort).isEqualTo((short) 13);
+        JNIReflection.setStaticShort(Short.MAX_VALUE, getClassName(), "staticShort", "S");
+        assertThat(TestObject.staticShort).isEqualTo(Short.MAX_VALUE);
     }
 
     @Test
     void getStaticInt() {
-        TestObject.staticInt = 11;
+        TestObject.staticInt = Integer.MAX_VALUE;
         int readInt = JNIReflection.getStaticInt(getClassName(), "staticInt", "I");
-        assertThat(readInt).isEqualTo(11);
+        assertThat(readInt).isEqualTo(Integer.MAX_VALUE);
     }
 
     @Test
     void setStaticInt() {
-        JNIReflection.setStaticInt(11, getClassName(), "staticInt", "I");
-        assertThat(TestObject.staticInt).isEqualTo(11);
+        JNIReflection.setStaticInt(Integer.MIN_VALUE, getClassName(), "staticInt", "I");
+        assertThat(TestObject.staticInt).isEqualTo(Integer.MIN_VALUE);
     }
 
     @Test
     void getStaticLong() {
-        TestObject.staticLong = 1173;
+        TestObject.staticLong = Long.MIN_VALUE;
         long readLong = JNIReflection.getStaticLong(getClassName(), "staticLong", "J");
-        assertThat(readLong).isEqualTo(1173);
+        assertThat(readLong).isEqualTo(Long.MIN_VALUE);
     }
 
     @Test
     void setStaticLong() {
-        JNIReflection.setStaticLong(1173, getClassName(), "staticLong", "J");
-        assertThat(TestObject.staticLong).isEqualTo(1173);
+        JNIReflection.setStaticLong(Long.MAX_VALUE, getClassName(), "staticLong", "J");
+        assertThat(TestObject.staticLong).isEqualTo(Long.MAX_VALUE);
     }
 
     @Test
     void getStaticFloat() {
-        TestObject.staticFloat = 3.14f;
+        TestObject.staticFloat = Float.MIN_VALUE;
         float readFloat = JNIReflection.getStaticFloat(getClassName(), "staticFloat", "F");
-        assertThat(readFloat).isEqualTo(3.14f);
+        assertThat(readFloat).isEqualTo(Float.MIN_VALUE);
     }
 
     @Test
     void setStaticFloat() {
-        JNIReflection.setStaticFloat(3.14f, getClassName(), "staticFloat", "F");
-        assertThat(TestObject.staticFloat).isEqualTo(3.14f);
+        JNIReflection.setStaticFloat(Float.MAX_VALUE, getClassName(), "staticFloat", "F");
+        assertThat(TestObject.staticFloat).isEqualTo(Float.MAX_VALUE);
     }
 
     @Test
     void getStaticDouble() {
-        TestObject.staticDouble = 2.71828;
+        TestObject.staticDouble = Math.PI;
         double readDouble = JNIReflection.getStaticDouble(getClassName(), "staticDouble", "D");
-        assertThat(readDouble).isEqualTo(2.71828);
+        assertThat(readDouble).isEqualTo(Math.PI);
     }
 
     @Test
     void setStaticDouble() {
-        JNIReflection.setStaticDouble(2.71828, getClassName(), "staticDouble", "D");
-        assertThat(TestObject.staticDouble).isEqualTo(2.71828);
+        JNIReflection.setStaticDouble(Math.E, getClassName(), "staticDouble", "D");
+        assertThat(TestObject.staticDouble).isEqualTo(Math.E);
     }
 
     @Test
@@ -140,28 +140,54 @@ class AccessorTest extends AbstractJNIReflectionTest {
 
     @Test
     void getInstanceByte() {
-        getTestObject().setInstanceByte((byte) 17);
+        getTestObject().setInstanceByte(Byte.MAX_VALUE);
         byte readByte = JNIReflection.getInstanceByte(getTestObject(), "instanceByte", "B");
-        assertThat(readByte).isEqualTo((byte) 17);
+        assertThat(readByte).isEqualTo(Byte.MAX_VALUE);
     }
 
     @Test
     void setInstanceByte() {
-        JNIReflection.setInstanceByte((byte) 17, getTestObject(), "instanceByte", "B");
-        assertThat(getTestObject().getInstanceByte()).isEqualTo((byte) 17);
+        JNIReflection.setInstanceByte(Byte.MAX_VALUE, getTestObject(), "instanceByte", "B");
+        assertThat(getTestObject().getInstanceByte()).isEqualTo(Byte.MAX_VALUE);
     }
 
     @Test
     void getInstanceShort() {
-        getTestObject().setInstanceShort((short) 19);
+        getTestObject().setInstanceShort(Short.MAX_VALUE);
         short readShort = JNIReflection.getInstanceShort(getTestObject(), "instanceShort", "S");
-        assertThat(readShort).isEqualTo((short) 19);
+        assertThat(readShort).isEqualTo(Short.MAX_VALUE);
     }
 
     @Test
     void setInstanceShort() {
-        JNIReflection.setInstanceShort((short) 19, getTestObject(), "instanceShort", "S");
-        assertThat(getTestObject().getInstanceShort()).isEqualTo((short) 19);
+        JNIReflection.setInstanceShort(Short.MAX_VALUE, getTestObject(), "instanceShort", "S");
+        assertThat(getTestObject().getInstanceShort()).isEqualTo(Short.MAX_VALUE);
+    }
+
+    @Test
+    void getInstanceInt() {
+        getTestObject().setInstanceInt(Integer.MAX_VALUE);
+        int readInt = JNIReflection.getInstanceInt(getTestObject(), "instanceInt", "I");
+        assertThat(readInt).isEqualTo(Integer.MAX_VALUE);
+    }
+
+    @Test
+    void setInstanceInt() {
+        JNIReflection.setInstanceInt(Integer.MAX_VALUE, getTestObject(), "instanceInt", "I");
+        assertThat(getTestObject().getInstanceInt()).isEqualTo(Integer.MAX_VALUE);
+    }
+
+    @Test
+    void getInstanceLong() {
+        getTestObject().setInstanceLong(Long.MAX_VALUE);
+        long readLong = JNIReflection.getInstanceLong(getTestObject(), "instanceLong", "J");
+        assertThat(readLong).isEqualTo(Long.MAX_VALUE);
+    }
+
+    @Test
+    void setInstanceLong() {
+        JNIReflection.setInstanceLong(Long.MAX_VALUE, getTestObject(), "instanceLong", "J");
+        assertThat(getTestObject().getInstanceLong()).isEqualTo(Long.MAX_VALUE);
     }
 
 }
