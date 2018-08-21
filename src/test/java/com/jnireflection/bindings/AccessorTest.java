@@ -229,4 +229,17 @@ class AccessorTest extends AbstractJNIReflectionTest {
         assertThat(getTestObject().isInstanceBoolean()).isTrue();
     }
 
+    @Test
+    void getInstanceChar() {
+        getTestObject().setInstanceChar('c');
+        char readDouble = JNIReflection.getInstanceChar(getTestObject(), "instanceChar" , "C");
+        assertThat(readDouble).isEqualTo('c');
+    }
+
+    @Test
+    void setInstanceChar() {
+        JNIReflection.setInstanceChar('c', getTestObject(), "instanceChar", "C");
+        assertThat(getTestObject().getInstanceChar()).isEqualTo('c');
+    }
+
 }
