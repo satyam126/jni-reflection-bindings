@@ -216,4 +216,17 @@ class AccessorTest extends AbstractJNIReflectionTest {
         assertThat(getTestObject().getInstanceDouble()).isEqualTo(Double.MAX_VALUE);
     }
 
+    @Test
+    void getInstanceBoolean() {
+        getTestObject().setInstanceBoolean(false);
+        boolean readBoolean = JNIReflection.getInstanceBoolean(getTestObject(), "instanceBoolean", "Z");
+        assertThat(readBoolean).isFalse();
+    }
+
+    @Test
+    void setInstanceBoolean() {
+        JNIReflection.setInstanceBoolean(true, getTestObject(), "instanceBoolean", "Z");
+        assertThat(getTestObject().isInstanceBoolean()).isTrue();
+    }
+
 }
