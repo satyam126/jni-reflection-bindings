@@ -73,7 +73,7 @@ public class JNIReflection {
 
     public static native float getInstanceFloat(Object instance, String fieldName, String signature);
 
-    public static native void setInstanceloat(float newFloat, Object instance, String fieldName, String signature);
+    public static native void setInstanceFloat(float newFloat, Object instance, String fieldName, String signature);
 
     public static native double getInstanceDouble(Object instance, String fieldName, String signature);
 

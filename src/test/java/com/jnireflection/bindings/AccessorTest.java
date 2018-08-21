@@ -190,4 +190,30 @@ class AccessorTest extends AbstractJNIReflectionTest {
         assertThat(getTestObject().getInstanceLong()).isEqualTo(Long.MAX_VALUE);
     }
 
+    @Test
+    void getInstanceFloat() {
+        getTestObject().setInstanceFloat(Float.MIN_VALUE);
+        float readFloat = JNIReflection.getInstanceFloat(getTestObject(), "instanceFloat", "F");
+        assertThat(readFloat).isEqualTo(Float.MIN_VALUE);
+    }
+
+    @Test
+    void setInstanceFloat() {
+        JNIReflection.setInstanceFloat(Float.MAX_VALUE, getTestObject(), "instanceFloat", "F");
+        assertThat(getTestObject().getInstanceFloat()).isEqualTo(Float.MAX_VALUE);
+    }
+
+    @Test
+    void getInstanceDouble() {
+        getTestObject().setInstanceDouble(Double.MIN_VALUE);
+        double readDouble = JNIReflection.getInstanceDouble(getTestObject(), "instanceDouble", "D");
+        assertThat(readDouble).isEqualTo(Double.MIN_VALUE);
+    }
+
+    @Test
+    void setInstanceDouble() {
+        JNIReflection.setInstanceDouble(Double.MAX_VALUE, getTestObject(), "instanceDouble", "D");
+        assertThat(getTestObject().getInstanceDouble()).isEqualTo(Double.MAX_VALUE);
+    }
+
 }
