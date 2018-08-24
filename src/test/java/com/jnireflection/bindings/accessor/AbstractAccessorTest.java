@@ -1,6 +1,5 @@
 package com.jnireflection.bindings.accessor;
 
-import com.jnireflection.bindings.JNIReflection;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -11,7 +10,6 @@ abstract class AbstractAccessorTest {
 
     @BeforeAll
     static void initializeLibrary() {
-        JNIReflection.loadLibrary();
         className = AccessorTestObject.class.getName().replace(".", "/");
     }
 

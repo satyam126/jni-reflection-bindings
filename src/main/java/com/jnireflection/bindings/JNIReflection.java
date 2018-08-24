@@ -9,24 +9,8 @@ public class JNIReflection {
     private static final HashMap<String, MethodSignatureInfo> staticMethodParameterTypeCache = new HashMap<>();
     private static final HashMap<String, MethodSignatureInfo> instanceMethodParameterTypeCache = new HashMap<>();
 
-    private static boolean loaded = false;
-
-    /**
-     * Loads the native library
-     */
-    public static void loadLibrary() {
-        if (loaded) {
-            return;
-        }
-
-        String devLibraryPath = System.getenv("dev_library_path");
-        if (devLibraryPath != null) {
-            System.load(devLibraryPath);
-        } else {
-            System.loadLibrary("jni-reflection");
-        }
-
-        loaded = true;
+    static {
+        LibraryLoader.load();
     }
 
     public static native Object getStaticObject(String className, String fieldName, String signature);
