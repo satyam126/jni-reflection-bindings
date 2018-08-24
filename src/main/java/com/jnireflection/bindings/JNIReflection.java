@@ -1,17 +1,32 @@
 package com.jnireflection.bindings;
 
+import com.jnireflection.bindings.errors.MethodSignatureError;
+
+import java.util.HashMap;
+
 public class JNIReflection {
+
+    private static final HashMap<String, MethodSignatureInfo> staticMethodParameterTypeCache = new HashMap<>();
+    private static final HashMap<String, MethodSignatureInfo> instanceMethodParameterTypeCache = new HashMap<>();
+
+    private static boolean loaded = false;
 
     /**
      * Loads the native library
      */
     public static void loadLibrary() {
+        if (loaded) {
+            return;
+        }
+
         String devLibraryPath = System.getenv("dev_library_path");
         if (devLibraryPath != null) {
             System.load(devLibraryPath);
         } else {
             System.loadLibrary("jni-reflection");
         }
+
+        loaded = true;
     }
 
     public static native Object getStaticObject(String className, String fieldName, String signature);
@@ -53,11 +68,11 @@ public class JNIReflection {
 
     public static native Object getInstanceObject(Object instance, String fieldName, String signature);
 
-    public static native void setInstanceObject(Object newObject, Object instance,String fieldName, String signature);
+    public static native void setInstanceObject(Object newObject, Object instance, String fieldName, String signature);
 
     public static native byte getInstanceByte(Object instance, String fieldName, String signature);
 
-    public static native void setInstanceByte(byte newByte, Object instance,String fieldName, String signature);
+    public static native void setInstanceByte(byte newByte, Object instance, String fieldName, String signature);
 
     public static native short getInstanceShort(Object instance, String fieldName, String signature);
 
@@ -87,6 +102,35 @@ public class JNIReflection {
     public static native char getInstanceChar(Object instance, String fieldName, String signature);
 
     public static native void setInstanceChar(char newChar, Object instance, String fieldName, String signature);
+
+    public static Object invokeStaticMethod(String className, String methodName, String signature, Object[] arguments) {
+        String methodId = className + methodName + signature;
+        if (!staticMethodParameterTypeCache.containsKey(methodId)) {
+            staticMethodParameterTypeCache.put(methodId, MethodSignatureInfo.parseSignature(signature));
+        }
+
+        MethodSignatureInfo methodSignatureInfo = staticMethodParameterTypeCache.get(methodId);
+        if (arguments.length != methodSignatureInfo.getParameterTypes().length()) {
+            throw new MethodSignatureError("Invalid return type: number of arguments does not match number of parameters");
+        }
+
+        return invokeGenericStaticMethod(className, methodName, signature, arguments, methodSignatureInfo);
+    }
+
+
+    private static Object invokeGenericStaticMethod(String className, String methodName, String signature, Object[] arguments, MethodSignatureInfo signatureInfo) {
+        int argumentCount = arguments.length;
+        String parameterTypes = signatureInfo.getParameterTypes();
+
+        switch (signatureInfo.getReturnType()) {
+            case 'L':
+               return invokeStaticObjectMethod(className, methodName, signature, arguments, parameterTypes, argumentCount);
+        }
+
+        throw new MethodSignatureError("Invalid return type: " + signatureInfo.getReturnType());
+    }
+
+    public static native Object invokeStaticObjectMethod(String className, String methodName, String signature, Object[] arguments, String parameterTypes, int argumentCount);
 
     public static native Object[] getInstances(String className);
 

@@ -1,12 +1,14 @@
-package com.jnireflection.bindings;
+package com.jnireflection.bindings.accessor;
 
+import com.jnireflection.bindings.JNIReflection;
 import com.jnireflection.bindings.errors.ClassNotFoundError;
 import com.jnireflection.bindings.errors.FieldNotFoundError;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
-class ErrorTest extends AbstractJNIReflectionTest {
+class ErrorTest extends AbstractAccessorTest {
 
     @Test
     void getStaticObjectInvalidClass() {
@@ -31,7 +33,7 @@ class ErrorTest extends AbstractJNIReflectionTest {
 
     @Test
     void getInstanceObjectInvalidObject() {
-        assertThatExceptionOfType(NullPointerException.class).isThrownBy(
+        assertThatNullPointerException().isThrownBy(
                 () -> JNIReflection.getInstanceObject(null, "instanceString", "Ljava/lang/String;")
         );
     }
@@ -39,14 +41,14 @@ class ErrorTest extends AbstractJNIReflectionTest {
     @Test
     void getInstanceObjectInvalidFieldName() {
         assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
-                () -> JNIReflection.getInstanceObject(getTestObject(), "invalidField", "Ljava/lang/String;")
+                () -> JNIReflection.getInstanceObject(getAccessorTestObject(), "invalidField", "Ljava/lang/String;")
         );
     }
 
     @Test
     void getInstanceObjectInvalidType() {
         assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
-                () -> JNIReflection.getInstanceObject(getTestObject(), "instanceString", "I")
+                () -> JNIReflection.getInstanceObject(getAccessorTestObject(), "instanceString", "I")
         );
     }
 
