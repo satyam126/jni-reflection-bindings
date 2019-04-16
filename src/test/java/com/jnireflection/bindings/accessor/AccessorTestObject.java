@@ -15,7 +15,6 @@ class AccessorTestObject {
     static boolean staticBoolean;
     static char staticChar;
 
-
     @Getter
     @Setter
     private String instanceString;

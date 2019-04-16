@@ -1,4 +1,4 @@
-package com.jnireflection.bindings.method;
+package com.jnireflection.bindings.invoker;
 
 public class MethodTestObject {
 

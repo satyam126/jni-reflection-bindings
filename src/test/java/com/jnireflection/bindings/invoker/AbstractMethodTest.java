@@ -1,4 +1,4 @@
-package com.jnireflection.bindings.method;
+package com.jnireflection.bindings.invoker;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +9,7 @@ abstract class AbstractMethodTest {
     private MethodTestObject methodTestObject;
 
     @BeforeAll
-    static void initializeLibrary() {
+    static void initializeClassName() {
         className = MethodTestObject.class.getName().replace(".", "/");
     }
 

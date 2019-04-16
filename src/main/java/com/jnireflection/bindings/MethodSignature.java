@@ -1,7 +1,10 @@
 package com.jnireflection.bindings;
 
 import com.jnireflection.bindings.errors.MethodSignatureError;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,7 +12,7 @@ import java.util.regex.Pattern;
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
-public class MethodSignatureInfo {
+public class MethodSignature {
 
     private static final Pattern signaturePattern = Pattern.compile("(\\()(.*)(\\))(.+)");
     private static final Pattern objectTypePattern = Pattern.compile("L.+?;");
@@ -20,20 +23,25 @@ public class MethodSignatureInfo {
     @Getter
     private final char returnType;
 
-    public static MethodSignatureInfo parseSignature(String methodSignature) {
+    public static MethodSignature parseSignature(String methodSignature) {
+        methodSignature = truncateObjectTypes(removeArrays(methodSignature));
         Matcher signatureMatcher = signaturePattern.matcher(methodSignature);
 
         if (signatureMatcher.find()) {
             char returnType = signatureMatcher.group(4).charAt(0);
             String parameterTypes = signatureMatcher.group(2);
-
-            Matcher objectTypeMatcher = objectTypePattern.matcher(parameterTypes);
-            String tidyParameterTypes = objectTypeMatcher.replaceAll("L");
-
-            return new MethodSignatureInfo(tidyParameterTypes, returnType);
+            return new MethodSignature(parameterTypes, returnType);
         }
 
         throw new MethodSignatureError("Invalid method signature: " + methodSignature);
+    }
+
+    private static String removeArrays(String methodSignature) {
+        return methodSignature.replace("[", "");
+    }
+
+    private static String truncateObjectTypes(String methodSignature) {
+        return objectTypePattern.matcher(methodSignature).replaceAll("L");
     }
 
 }

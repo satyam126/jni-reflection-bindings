@@ -9,7 +9,7 @@ abstract class AbstractAccessorTest {
     private AccessorTestObject accessorTestObject;
 
     @BeforeAll
-    static void initializeLibrary() {
+    static void initializeClassName() {
         className = AccessorTestObject.class.getName().replace(".", "/");
     }
 
