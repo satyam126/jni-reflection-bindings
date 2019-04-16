@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 @AllArgsConstructor
 public class MethodSignature {
 
-    private static final Pattern signaturePattern = Pattern.compile("(\\()(.*)(\\))(.+)");
+    private static final Pattern signaturePattern = Pattern.compile("^\\(([LBCDFIJSZ]*)\\)([VLBCDFIJSZ])$");
     private static final Pattern objectTypePattern = Pattern.compile("L.+?;");
 
     @Getter
