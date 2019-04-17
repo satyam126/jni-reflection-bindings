@@ -3,7 +3,7 @@ package com.jnireflection.bindings.accessor;
 import lombok.Data;
 
 @Data
-public class DummyObject {
+class DummyObject {
 
     private final String string;
 

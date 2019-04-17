@@ -52,4 +52,11 @@ class AccessorErrorTest extends AbstractAccessorTest {
         );
     }
 
+    @Test
+    void getInstancesInvalidClass() {
+        assertThatExceptionOfType(Error.class).isThrownBy(
+                () -> JNIAccessor.getInstances("invalidClass")
+        );
+    }
+
 }
