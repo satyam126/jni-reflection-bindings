@@ -1,6 +1,8 @@
-package com.deimos.bindings;
+package com.deimos.binding;
 
-public class JniAccessor {
+import com.deimos.LibraryLoader;
+
+public class Accessor {
 
     static {
         LibraryLoader.load();

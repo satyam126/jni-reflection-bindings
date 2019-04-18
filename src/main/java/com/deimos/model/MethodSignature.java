@@ -1,6 +1,6 @@
-package com.deimos.bindings;
+package com.deimos.model;
 
-import com.deimos.bindings.errors.MethodSignatureError;
+import com.deimos.error.MethodSignatureError;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.deimos.bindings.invoker;
+package com.deimos.binding.invoker;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

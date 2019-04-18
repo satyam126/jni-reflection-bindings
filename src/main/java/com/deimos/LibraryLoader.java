@@ -1,4 +1,4 @@
-package com.deimos.bindings;
+package com.deimos;
 
 public class LibraryLoader {
 

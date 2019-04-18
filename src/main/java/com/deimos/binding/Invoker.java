@@ -1,11 +1,13 @@
-package com.deimos.bindings;
+package com.deimos.binding;
 
-import com.deimos.bindings.errors.MethodSignatureError;
+import com.deimos.LibraryLoader;
+import com.deimos.error.MethodSignatureError;
+import com.deimos.model.MethodSignature;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class JniInvoker {
+public class Invoker {
 
     private static final Map<String, MethodSignature> staticMethodSignatureCache = new ConcurrentHashMap<>();
     private static final Map<String, MethodSignature> instanceMethodSignatureCache = new ConcurrentHashMap<>();

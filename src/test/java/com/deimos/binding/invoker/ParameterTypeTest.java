@@ -1,6 +1,6 @@
-package com.deimos.bindings.invoker;
+package com.deimos.binding.invoker;
 
-import com.deimos.bindings.JniInvoker;
+import com.deimos.binding.Invoker;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -11,7 +11,7 @@ class ParameterTypeTest extends AbstractMethodTest {
 
     @Test
     void staticEmptyParameter() {
-        String o = JniInvoker.invoke(
+        String o = Invoker.invoke(
                 getClassName(), "staticEmptyParameter",
                 "()Ljava/lang/String;");
         assertThat(o).isEqualTo("ok");
@@ -19,7 +19,7 @@ class ParameterTypeTest extends AbstractMethodTest {
 
     @Test
     void staticObjectParameter() {
-        String o = JniInvoker.invoke(
+        String o = Invoker.invoke(
                 getClassName(), "staticObjectParameter",
                 "(Ljava/lang/String;)Ljava/lang/String;", "ok"
         );
@@ -29,7 +29,7 @@ class ParameterTypeTest extends AbstractMethodTest {
     @Test
     void staticArrayParameter() {
         int[] argument = {1, 2, 3};
-        String o = JniInvoker.invoke(
+        String o = Invoker.invoke(
                 getClassName(), "staticArrayParameter",
                 "([I)Ljava/lang/String;", (Object) argument
         );
@@ -38,7 +38,7 @@ class ParameterTypeTest extends AbstractMethodTest {
 
     @Test
     void staticByteParameter() {
-        String s = JniInvoker.invoke(
+        String s = Invoker.invoke(
                 getClassName(), "staticByteParameter",
                 "(B)Ljava/lang/String;", (byte) 1
         );
@@ -47,7 +47,7 @@ class ParameterTypeTest extends AbstractMethodTest {
 
     @Test
     void staticCharParameter() {
-        String s = JniInvoker.invoke(
+        String s = Invoker.invoke(
                 getClassName(), "staticCharParameter",
                 "(C)Ljava/lang/String;", 'a'
         );
@@ -56,7 +56,7 @@ class ParameterTypeTest extends AbstractMethodTest {
 
     @Test
     void staticDoubleParameter() {
-        String s = JniInvoker.invoke(
+        String s = Invoker.invoke(
                 getClassName(), "staticDoubleParameter",
                 "(D)Ljava/lang/String;", 3.14
         );
@@ -65,7 +65,7 @@ class ParameterTypeTest extends AbstractMethodTest {
 
     @Test
     void staticFloatParameter() {
-        String s = JniInvoker.invoke(
+        String s = Invoker.invoke(
                 getClassName(), "staticFloatParameter",
                 "(F)Ljava/lang/String;", 3.14f
         );
@@ -74,7 +74,7 @@ class ParameterTypeTest extends AbstractMethodTest {
 
     @Test
     void staticIntegerParameter() {
-        String s = JniInvoker.invoke(
+        String s = Invoker.invoke(
                 getClassName(), "staticIntegerParameter",
                 "(I)Ljava/lang/String;", 1
         );
@@ -83,7 +83,7 @@ class ParameterTypeTest extends AbstractMethodTest {
 
     @Test
     void staticLongParameter() {
-        String s = JniInvoker.invoke(
+        String s = Invoker.invoke(
                 getClassName(), "staticLongParameter",
                 "(J)Ljava/lang/String;", 3L
         );
@@ -92,7 +92,7 @@ class ParameterTypeTest extends AbstractMethodTest {
 
     @Test
     void staticShortParameter() {
-        String s = JniInvoker.invoke(
+        String s = Invoker.invoke(
                 getClassName(), "staticShortParameter",
                 "(S)Ljava/lang/String;", (short) 3
         );
@@ -101,7 +101,7 @@ class ParameterTypeTest extends AbstractMethodTest {
 
     @Test
     void staticBooleanParameter() {
-        String s = JniInvoker.invoke(
+        String s = Invoker.invoke(
                 getClassName(), "staticBooleanParameter",
                 "(Z)Ljava/lang/String;", true
         );

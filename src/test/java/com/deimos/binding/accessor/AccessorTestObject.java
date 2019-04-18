@@ -1,4 +1,4 @@
-package com.deimos.bindings.accessor;
+package com.deimos.binding.accessor;
 
 import lombok.Getter;
 import lombok.Setter;

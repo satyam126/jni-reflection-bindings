@@ -1,4 +1,4 @@
-package com.deimos.bindings.invoker;
+package com.deimos.binding.invoker;
 
 public class ReturnTypeTest extends AbstractMethodTest {
 }

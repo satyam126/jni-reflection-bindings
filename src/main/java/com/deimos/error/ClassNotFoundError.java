@@ -1,4 +1,4 @@
-package com.deimos.bindings.errors;
+package com.deimos.error;
 
 public class ClassNotFoundError extends Error {
 
