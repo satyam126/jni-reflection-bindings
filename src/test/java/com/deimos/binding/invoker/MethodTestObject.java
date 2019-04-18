@@ -51,8 +51,8 @@ public class MethodTestObject {
         return String.valueOf(a);
     }
 
-    public static void staticVoidReturnType() {
-
+    public static String staticCombinationParameter(int[] a, String b, int[] c, int d, String e) {
+        return Arrays.toString(a) + b + Arrays.toString(c) + d + e;
     }
 
 }

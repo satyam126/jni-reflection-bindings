@@ -127,120 +127,120 @@ class AccessorTest extends AbstractAccessorTest {
 
     @Test
     void getInstanceObject() {
-        getAccessorTestObject().setInstanceString("some text");
-        String readString = (String) Accessor.getInstanceObject(getAccessorTestObject(), "instanceString",
+        getObject().setInstanceString("some text");
+        String readString = (String) Accessor.getInstanceObject(getObject(), "instanceString",
                 "Ljava/lang/String;");
         assertThat(readString).isEqualTo("some text");
     }
 
     @Test
     void setInstanceObject() {
-        Accessor.setInstanceObject("some text", getAccessorTestObject(), "instanceString", "Ljava/lang/String;");
-        assertThat(getAccessorTestObject().getInstanceString()).isEqualTo("some text");
+        Accessor.setInstanceObject("some text", getObject(), "instanceString", "Ljava/lang/String;");
+        assertThat(getObject().getInstanceString()).isEqualTo("some text");
     }
 
     @Test
     void getInstanceByte() {
-        getAccessorTestObject().setInstanceByte(Byte.MAX_VALUE);
-        byte readByte = Accessor.getInstanceByte(getAccessorTestObject(), "instanceByte", "B");
+        getObject().setInstanceByte(Byte.MAX_VALUE);
+        byte readByte = Accessor.getInstanceByte(getObject(), "instanceByte", "B");
         assertThat(readByte).isEqualTo(Byte.MAX_VALUE);
     }
 
     @Test
     void setInstanceByte() {
-        Accessor.setInstanceByte(Byte.MAX_VALUE, getAccessorTestObject(), "instanceByte", "B");
-        assertThat(getAccessorTestObject().getInstanceByte()).isEqualTo(Byte.MAX_VALUE);
+        Accessor.setInstanceByte(Byte.MAX_VALUE, getObject(), "instanceByte", "B");
+        assertThat(getObject().getInstanceByte()).isEqualTo(Byte.MAX_VALUE);
     }
 
     @Test
     void getInstanceShort() {
-        getAccessorTestObject().setInstanceShort(Short.MAX_VALUE);
-        short readShort = Accessor.getInstanceShort(getAccessorTestObject(), "instanceShort", "S");
+        getObject().setInstanceShort(Short.MAX_VALUE);
+        short readShort = Accessor.getInstanceShort(getObject(), "instanceShort", "S");
         assertThat(readShort).isEqualTo(Short.MAX_VALUE);
     }
 
     @Test
     void setInstanceShort() {
-        Accessor.setInstanceShort(Short.MAX_VALUE, getAccessorTestObject(), "instanceShort", "S");
-        assertThat(getAccessorTestObject().getInstanceShort()).isEqualTo(Short.MAX_VALUE);
+        Accessor.setInstanceShort(Short.MAX_VALUE, getObject(), "instanceShort", "S");
+        assertThat(getObject().getInstanceShort()).isEqualTo(Short.MAX_VALUE);
     }
 
     @Test
     void getInstanceInt() {
-        getAccessorTestObject().setInstanceInt(Integer.MAX_VALUE);
-        int readInt = Accessor.getInstanceInt(getAccessorTestObject(), "instanceInt", "I");
+        getObject().setInstanceInt(Integer.MAX_VALUE);
+        int readInt = Accessor.getInstanceInt(getObject(), "instanceInt", "I");
         assertThat(readInt).isEqualTo(Integer.MAX_VALUE);
     }
 
     @Test
     void setInstanceInt() {
-        Accessor.setInstanceInt(Integer.MAX_VALUE, getAccessorTestObject(), "instanceInt", "I");
-        assertThat(getAccessorTestObject().getInstanceInt()).isEqualTo(Integer.MAX_VALUE);
+        Accessor.setInstanceInt(Integer.MAX_VALUE, getObject(), "instanceInt", "I");
+        assertThat(getObject().getInstanceInt()).isEqualTo(Integer.MAX_VALUE);
     }
 
     @Test
     void getInstanceLong() {
-        getAccessorTestObject().setInstanceLong(Long.MAX_VALUE);
-        long readLong = Accessor.getInstanceLong(getAccessorTestObject(), "instanceLong", "J");
+        getObject().setInstanceLong(Long.MAX_VALUE);
+        long readLong = Accessor.getInstanceLong(getObject(), "instanceLong", "J");
         assertThat(readLong).isEqualTo(Long.MAX_VALUE);
     }
 
     @Test
     void setInstanceLong() {
-        Accessor.setInstanceLong(Long.MAX_VALUE, getAccessorTestObject(), "instanceLong", "J");
-        assertThat(getAccessorTestObject().getInstanceLong()).isEqualTo(Long.MAX_VALUE);
+        Accessor.setInstanceLong(Long.MAX_VALUE, getObject(), "instanceLong", "J");
+        assertThat(getObject().getInstanceLong()).isEqualTo(Long.MAX_VALUE);
     }
 
     @Test
     void getInstanceFloat() {
-        getAccessorTestObject().setInstanceFloat(Float.MIN_VALUE);
-        float readFloat = Accessor.getInstanceFloat(getAccessorTestObject(), "instanceFloat", "F");
+        getObject().setInstanceFloat(Float.MIN_VALUE);
+        float readFloat = Accessor.getInstanceFloat(getObject(), "instanceFloat", "F");
         assertThat(readFloat).isEqualTo(Float.MIN_VALUE);
     }
 
     @Test
     void setInstanceFloat() {
-        Accessor.setInstanceFloat(Float.MAX_VALUE, getAccessorTestObject(), "instanceFloat", "F");
-        assertThat(getAccessorTestObject().getInstanceFloat()).isEqualTo(Float.MAX_VALUE);
+        Accessor.setInstanceFloat(Float.MAX_VALUE, getObject(), "instanceFloat", "F");
+        assertThat(getObject().getInstanceFloat()).isEqualTo(Float.MAX_VALUE);
     }
 
     @Test
     void getInstanceDouble() {
-        getAccessorTestObject().setInstanceDouble(Double.MIN_VALUE);
-        double readDouble = Accessor.getInstanceDouble(getAccessorTestObject(), "instanceDouble", "D");
+        getObject().setInstanceDouble(Double.MIN_VALUE);
+        double readDouble = Accessor.getInstanceDouble(getObject(), "instanceDouble", "D");
         assertThat(readDouble).isEqualTo(Double.MIN_VALUE);
     }
 
     @Test
     void setInstanceDouble() {
-        Accessor.setInstanceDouble(Double.MAX_VALUE, getAccessorTestObject(), "instanceDouble", "D");
-        assertThat(getAccessorTestObject().getInstanceDouble()).isEqualTo(Double.MAX_VALUE);
+        Accessor.setInstanceDouble(Double.MAX_VALUE, getObject(), "instanceDouble", "D");
+        assertThat(getObject().getInstanceDouble()).isEqualTo(Double.MAX_VALUE);
     }
 
     @Test
     void getInstanceBoolean() {
-        getAccessorTestObject().setInstanceBoolean(false);
-        boolean readBoolean = Accessor.getInstanceBoolean(getAccessorTestObject(), "instanceBoolean", "Z");
+        getObject().setInstanceBoolean(false);
+        boolean readBoolean = Accessor.getInstanceBoolean(getObject(), "instanceBoolean", "Z");
         assertThat(readBoolean).isFalse();
     }
 
     @Test
     void setInstanceBoolean() {
-        Accessor.setInstanceBoolean(true, getAccessorTestObject(), "instanceBoolean", "Z");
-        assertThat(getAccessorTestObject().isInstanceBoolean()).isTrue();
+        Accessor.setInstanceBoolean(true, getObject(), "instanceBoolean", "Z");
+        assertThat(getObject().isInstanceBoolean()).isTrue();
     }
 
     @Test
     void getInstanceChar() {
-        getAccessorTestObject().setInstanceChar('c');
-        char readDouble = Accessor.getInstanceChar(getAccessorTestObject(), "instanceChar", "C");
+        getObject().setInstanceChar('c');
+        char readDouble = Accessor.getInstanceChar(getObject(), "instanceChar", "C");
         assertThat(readDouble).isEqualTo('c');
     }
 
     @Test
     void setInstanceChar() {
-        Accessor.setInstanceChar('c', getAccessorTestObject(), "instanceChar", "C");
-        assertThat(getAccessorTestObject().getInstanceChar()).isEqualTo('c');
+        Accessor.setInstanceChar('c', getObject(), "instanceChar", "C");
+        assertThat(getObject().getInstanceChar()).isEqualTo('c');
     }
 
     @Test

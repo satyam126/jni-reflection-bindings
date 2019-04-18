@@ -41,14 +41,14 @@ class AccessorErrorTest extends AbstractAccessorTest {
     @Test
     void getInstanceObjectInvalidFieldName() {
         assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
-                () -> Accessor.getInstanceObject(getAccessorTestObject(), "invalidField", "Ljava/lang/String;")
+                () -> Accessor.getInstanceObject(getObject(), "invalidField", "Ljava/lang/String;")
         );
     }
 
     @Test
     void getInstanceObjectInvalidType() {
         assertThatExceptionOfType(FieldNotFoundError.class).isThrownBy(
-                () -> Accessor.getInstanceObject(getAccessorTestObject(), "instanceString", "I")
+                () -> Accessor.getInstanceObject(getObject(), "instanceString", "I")
         );
     }
 

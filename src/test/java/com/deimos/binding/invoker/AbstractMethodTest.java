@@ -22,7 +22,7 @@ abstract class AbstractMethodTest {
         return className;
     }
 
-    MethodTestObject getMethodTestObject() {
+    MethodTestObject getObject() {
         return methodTestObject;
     }
 

@@ -31,7 +31,7 @@ abstract class AbstractAccessorTest {
         return className;
     }
 
-    AccessorTestObject getAccessorTestObject() {
+    AccessorTestObject getObject() {
         return accessorTestObject;
     }
 
