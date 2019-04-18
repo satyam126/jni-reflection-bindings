@@ -1,4 +1,4 @@
-package com.jnireflection.bindings.accessor;
+package com.deimos.bindings.accessor;
 
 import lombok.Data;
 

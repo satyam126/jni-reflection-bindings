@@ -1,4 +1,4 @@
-package com.jnireflection.bindings.accessor;
+package com.deimos.bindings.accessor;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

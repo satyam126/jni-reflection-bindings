@@ -1,35 +1,32 @@
-package com.jnireflection.bindings;
+package com.deimos.bindings;
 
-import com.jnireflection.bindings.errors.MethodSignatureError;
+import com.deimos.bindings.errors.MethodSignatureError;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class JNIInvoker {
+public class JniInvoker {
 
-    private static final Map<String, MethodSignature> staticMethodParameterTypeCache = new ConcurrentHashMap<>();
-    private static final Map<String, MethodSignature> instanceMethodParameterTypeCache = new ConcurrentHashMap<>();
+    private static final Map<String, MethodSignature> staticMethodSignatureCache = new ConcurrentHashMap<>();
+    private static final Map<String, MethodSignature> instanceMethodSignatureCache = new ConcurrentHashMap<>();
 
     static {
         LibraryLoader.load();
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T invokeStaticMethodAs(String className, String methodName, String signature, ParameterizedTypeReference<T> p, Object... arguments) {
-        Object o = invokeStaticMethod(className, methodName, signature, arguments);
-        if (o == null) {
-            throw new ClassCastException("object is null");
-        }
-        return (T) o;
-    }
-
-    public static Object invokeStaticMethod(String className, String methodName, String signature, Object... arguments) {
-        MethodSignature methodSignature = getMethodSignature(staticMethodParameterTypeCache, className, methodName, signature);
+    public static <T> T invoke(String className, String methodName, String signature, Object... arguments) {
+        MethodSignature methodSignature = getMethodSignature(staticMethodSignatureCache, className, methodName, signature);
         if (arguments.length != methodSignature.getParameterTypes().length()) {
             throw new MethodSignatureError("Argument mismatch: number of arguments does not match number of parameters");
         }
 
-        return invokeGenericStaticMethod(className, methodName, signature, arguments, methodSignature);
+        Object o = invokeGenericStaticMethod(className, methodName, signature, arguments, methodSignature);
+        if (o == null) {
+            throw new ClassCastException("object is null");
+        }
+
+        return (T) o;
     }
 
     private static MethodSignature getMethodSignature(Map<String, MethodSignature> cache, String className, String methodName, String signature) {
@@ -39,6 +36,7 @@ public class JNIInvoker {
         } else {
             MethodSignature methodSignature = MethodSignature.parseSignature(signature);
             cache.put(methodId, methodSignature);
+
             return methodSignature;
         }
     }
@@ -55,15 +53,20 @@ public class JNIInvoker {
                 return invokeStaticObjectMethod(className, methodName, signature, arguments, parameterTypes);
             case 'Z':
                 return invokeStaticBooleanMethod(className, methodName, signature, arguments, parameterTypes);
+            default:
+                throw new MethodSignatureError("Invalid return type: " + signatureInfo.getReturnType());
+
         }
-
-        throw new MethodSignatureError("Invalid return type: " + signatureInfo.getReturnType());
     }
-
-    public static native Object invokeStaticObjectMethod(String className, String methodName, String signature, Object[] arguments, String parameterTypes);
 
     public static native void invokeStaticVoidMethod(String className, String methodName, String signature, Object[] arguments, String parameterTypes);
 
+    public static native Object invokeStaticObjectMethod(String className, String methodName, String signature, Object[] arguments, String parameterTypes);
+
     public static native boolean invokeStaticBooleanMethod(String className, String methodName, String signature, Object[] arguments, String parameterTypes);
+
+    public static native Object invokeInstanceObjectMethod(Object instance, String methodName, String signature, Object[] arguments, String parameterTypes);
+
+    public static native Object invokeConstructor(String className, String signature, Object[] arguments, String parameterTypes);
 
 }

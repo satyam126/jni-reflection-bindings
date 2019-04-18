@@ -1,4 +1,4 @@
-package com.jnireflection.bindings;
+package com.deimos.bindings;
 
 public class LibraryLoader {
 

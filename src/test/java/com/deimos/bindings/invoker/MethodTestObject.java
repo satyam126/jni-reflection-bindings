@@ -1,4 +1,4 @@
-package com.jnireflection.bindings.invoker;
+package com.deimos.bindings.invoker;
 
 import lombok.Data;
 
@@ -49,6 +49,10 @@ public class MethodTestObject {
 
     public static String staticBooleanParameter(boolean a) {
         return String.valueOf(a);
+    }
+
+    public static void staticVoidReturnType() {
+
     }
 
 }

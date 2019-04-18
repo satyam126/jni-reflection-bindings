@@ -1,6 +1,6 @@
-package com.jnireflection.bindings;
+package com.deimos.bindings;
 
-import com.jnireflection.bindings.errors.MethodSignatureError;
+import com.deimos.bindings.errors.MethodSignatureError;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

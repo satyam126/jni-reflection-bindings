@@ -1,4 +1,4 @@
-package com.jnireflection.bindings.errors;
+package com.deimos.bindings.errors;
 
 public class FieldNotFoundError extends Error {
 

@@ -1,7 +1,7 @@
-package com.jnireflection.bindings.invoker;
+package com.deimos.bindings.invoker;
 
-import com.jnireflection.bindings.MethodSignature;
-import com.jnireflection.bindings.errors.MethodSignatureError;
+import com.deimos.bindings.MethodSignature;
+import com.deimos.bindings.errors.MethodSignatureError;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,6 +1,6 @@
-package com.jnireflection.bindings;
+package com.deimos.bindings;
 
-public class JNIAccessor {
+public class JniAccessor {
 
     static {
         LibraryLoader.load();
