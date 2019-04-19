@@ -123,4 +123,19 @@ class ParameterTypeTest extends AbstractMethodTest {
         assertThat(s).isEqualTo(Arrays.toString(a) + b + Arrays.toString(c) + d + e);
     }
 
+    @Test
+    void instanceCombinationParameter() {
+        int[] a = {1, 2, 3};
+        String b = "b";
+        int[] c = {4, 5, 6};
+        int d = 7;
+        String e = "e";
+        String s = Invoker.invoke(
+                getObject(), "instanceCombinationParameter",
+                "([ILjava/lang/String;[IILjava/lang/String;)Ljava/lang/String;",
+                a, b, c, d, e
+        );
+        assertThat(s).isEqualTo(Arrays.toString(a) + b + Arrays.toString(c) + d + e);
+    }
+
 }

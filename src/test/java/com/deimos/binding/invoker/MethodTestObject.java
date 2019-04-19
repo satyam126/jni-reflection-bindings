@@ -55,4 +55,8 @@ public class MethodTestObject {
         return Arrays.toString(a) + b + Arrays.toString(c) + d + e;
     }
 
+    public String instanceCombinationParameter(int[] a, String b, int[] c, int d, String e) {
+        return Arrays.toString(a) + b + Arrays.toString(c) + d + e;
+    }
+
 }
