@@ -9,32 +9,29 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Invoker {
 
-    private static final Map<String, MethodSignature> staticMethodSignatureCache = new ConcurrentHashMap<>();
-    private static final Map<String, MethodSignature> instanceMethodSignatureCache = new ConcurrentHashMap<>();
-    private static final Map<String, MethodSignature> constructorMethodSignatureCache = new ConcurrentHashMap<>();
+    private static final Map<String, MethodSignature> methodSignatureCache = new ConcurrentHashMap<>();
 
     static {
         LibraryLoader.load();
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T invoke(String className, String methodName, String signature, Object... arguments) {
-        MethodSignature methodSignature = fetchMethodSignature(staticMethodSignatureCache, className, methodName, signature);
+    public static <T> T invokeStatic(String className, String methodName, String signature, Object... arguments) {
+        var methodSignature = getMethodSignature(signature);
         validateArgumentSize(methodSignature, arguments);
-        return (T) invokeGenericStaticMethod(className, methodName, signature, arguments, methodSignature);
+        return (T) invokeGenericStaticMethod(className, methodName, methodSignature, arguments);
     }
 
     @SuppressWarnings("unchecked")
     public static <T> T invoke(Object instance, String methodName, String signature, Object... arguments) {
-        String identifier = String.valueOf(instance.hashCode());
-        MethodSignature methodSignature = fetchMethodSignature(instanceMethodSignatureCache, identifier, methodName, signature);
+        var methodSignature = getMethodSignature(signature);
         validateArgumentSize(methodSignature, arguments);
-        return (T) invokeGenericInstanceMethod(instance, methodName, signature, arguments, methodSignature);
+        return (T) invokeGenericInstanceMethod(instance, methodName, methodSignature, arguments);
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T invoke(String className, String signature, Object... arguments) {
-        MethodSignature methodSignature = fetchMethodSignature(constructorMethodSignatureCache, className, "<init>", signature);
+    public static <T> T invokeNew(String className, String signature, Object... arguments) {
+        var methodSignature = getMethodSignature(signature);
         validateArgumentSize(methodSignature, arguments);
         return (T) invokeConstructor(className, signature, arguments, methodSignature.getParameterTypes());
     }
@@ -45,45 +42,42 @@ public class Invoker {
         }
     }
 
-    private static MethodSignature fetchMethodSignature(Map<String, MethodSignature> cache, String className, String methodName, String signature) {
-        String methodId = className + methodName + signature;
-        if (cache.containsKey(methodId)) {
-            return cache.get(methodId);
+    private static MethodSignature getMethodSignature(String signature) {
+        if (methodSignatureCache.containsKey(signature)) {
+            return methodSignatureCache.get(signature);
         } else {
-            MethodSignature methodSignature = MethodSignature.parseSignature(signature);
-            cache.put(methodId, methodSignature);
-
+            var methodSignature = MethodSignature.parseSignature(signature);
+            methodSignatureCache.put(signature, methodSignature);
             return methodSignature;
         }
     }
 
-    private static Object invokeGenericStaticMethod(String className, String methodName, String signature, Object[] arguments, MethodSignature signatureInfo) {
-        String parameterTypes = signatureInfo.getParameterTypes();
-        char returnType = signatureInfo.getReturnType();
+    private static Object invokeGenericStaticMethod(String className, String methodName, MethodSignature signature, Object[] arguments) {
+        var parameterTypes = signature.getParameterTypes();
+        var returnType = signature.getReturnType();
 
         switch (returnType) {
             case 'V':
-                invokeStaticVoidMethod(className, methodName, signature, arguments, parameterTypes);
+                invokeStaticVoidMethod(className, methodName, signature.getSignature(), arguments, parameterTypes);
                 return null;
             case 'L':
-                return invokeStaticObjectMethod(className, methodName, signature, arguments, parameterTypes);
+                return invokeStaticObjectMethod(className, methodName, signature.getSignature(), arguments, parameterTypes);
             case 'Z':
-                return invokeStaticBooleanMethod(className, methodName, signature, arguments, parameterTypes);
+                return invokeStaticBooleanMethod(className, methodName, signature.getSignature(), arguments, parameterTypes);
             default:
-                throw new MethodSignatureError("Invalid return type: " + signatureInfo.getReturnType());
-
+                throw new MethodSignatureError("Invalid return type: " + signature.getReturnType());
         }
     }
 
-    private static Object invokeGenericInstanceMethod(Object instance, String methodName, String signature, Object[] arguments, MethodSignature signatureInfo) {
-        String parameterTypes = signatureInfo.getParameterTypes();
-        char returnType = signatureInfo.getReturnType();
+    private static Object invokeGenericInstanceMethod(Object instance, String methodName, MethodSignature signature, Object[] arguments) {
+        var parameterTypes = signature.getParameterTypes();
+        var returnType = signature.getReturnType();
 
         switch (returnType) {
             case 'L':
-                return invokeInstanceObjectMethod(instance, methodName, signature, arguments, parameterTypes);
+                return invokeInstanceObjectMethod(instance, methodName, signature.getSignature(), arguments, parameterTypes);
             default:
-                throw new MethodSignatureError("Invalid return type: " + signatureInfo.getReturnType());
+                throw new MethodSignatureError("Invalid return type: " + signature.getReturnType());
 
         }
     }

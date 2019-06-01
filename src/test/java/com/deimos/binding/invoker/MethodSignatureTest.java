@@ -1,7 +1,7 @@
 package com.deimos.binding.invoker;
 
-import com.deimos.model.MethodSignature;
 import com.deimos.error.MethodSignatureError;
+import com.deimos.model.MethodSignature;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,19 +25,25 @@ class MethodSignatureTest {
 
     @Test
     void twoObjects() {
-        MethodSignature methodSignature = new MethodSignature("LZL", 'V');
+        MethodSignature methodSignature = new MethodSignature(
+                "(Ljava/lang/String;ZLjava/lang/NullPointerException;)V", "LZL", 'V'
+        );
         assertThat(MethodSignature.parseSignature("(Ljava/lang/String;ZLjava/lang/NullPointerException;)V")).isEqualTo(methodSignature);
     }
 
     @Test
     void twoArrays() {
-        MethodSignature methodSignature = new MethodSignature("LZL", 'V');
+        MethodSignature methodSignature = new MethodSignature(
+                "([Ljava/lang/String;Z[Ljava/lang/NullPointerException;)V", "LZL", 'V'
+        );
         assertThat(MethodSignature.parseSignature("([Ljava/lang/String;Z[Ljava/lang/NullPointerException;)V")).isEqualTo(methodSignature);
     }
 
     @Test
     void arrayAsReturnType() {
-        MethodSignature methodSignature = new MethodSignature("", 'L');
+        MethodSignature methodSignature = new MethodSignature(
+                "()Ljava/lang/String;", "", 'L'
+        );
         assertThat(MethodSignature.parseSignature("()Ljava/lang/String;")).isEqualTo(methodSignature);
     }
 

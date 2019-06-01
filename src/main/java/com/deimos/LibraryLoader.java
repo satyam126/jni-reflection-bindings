@@ -7,12 +7,12 @@ public class LibraryLoader {
     /**
      * Loads the native library
      */
-    public static void load() {
+    public static synchronized void load() {
         if (loaded) {
             return;
         }
 
-        String devLibraryPath = System.getenv("dev_library_path");
+        var devLibraryPath = System.getenv("library_path");
         if (devLibraryPath != null) {
             System.load(devLibraryPath);
         } else {

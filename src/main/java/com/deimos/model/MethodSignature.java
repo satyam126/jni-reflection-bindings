@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @ToString
@@ -19,22 +18,25 @@ public class MethodSignature {
     private static final Pattern arrayPattern = Pattern.compile("\\[[LBCDFIJSZ]");
 
     @Getter
+    private final String signature;
+
+    @Getter
     private final String parameterTypes;
 
     @Getter
     private final char returnType;
 
-    public static MethodSignature parseSignature(String methodSignature) {
-        methodSignature = transformArraysToObjects(truncateObjectTypes(methodSignature));
-        Matcher signatureMatcher = signaturePattern.matcher(methodSignature);
+    public static MethodSignature parseSignature(String signature) {
+        var desugaredSignature = transformArraysToObjects(truncateObjectTypes(signature));
+        var signatureMatcher = signaturePattern.matcher(desugaredSignature);
 
         if (signatureMatcher.find()) {
-            String parameterTypes = signatureMatcher.group(1);
-            char returnType = signatureMatcher.group(2).charAt(0);
-            return new MethodSignature(parameterTypes, returnType);
+            var parameterTypes = signatureMatcher.group(1);
+            var returnType = signatureMatcher.group(2).charAt(0);
+            return new MethodSignature(signature, parameterTypes, returnType);
         }
 
-        throw new MethodSignatureError("Invalid method signature: " + methodSignature);
+        throw new MethodSignatureError("Invalid method signature: " + signature);
     }
 
     private static String transformArraysToObjects(String methodSignature) {
