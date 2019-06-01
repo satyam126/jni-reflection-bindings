@@ -12,14 +12,14 @@ class MethodSignatureTest {
     @Test
     void bracketMismatch() {
         assertThatExceptionOfType(MethodSignatureError.class).isThrownBy(
-                () -> MethodSignature.parseSignature("I)V")
+                () -> MethodSignature.parse("I)V")
         );
     }
 
     @Test
     void invalidType() {
         assertThatExceptionOfType(MethodSignatureError.class).isThrownBy(
-                () -> MethodSignature.parseSignature("(K)V")
+                () -> MethodSignature.parse("(K)V")
         );
     }
 
@@ -28,7 +28,7 @@ class MethodSignatureTest {
         MethodSignature methodSignature = new MethodSignature(
                 "(Ljava/lang/String;ZLjava/lang/NullPointerException;)V", "LZL", 'V'
         );
-        assertThat(MethodSignature.parseSignature("(Ljava/lang/String;ZLjava/lang/NullPointerException;)V")).isEqualTo(methodSignature);
+        assertThat(MethodSignature.parse("(Ljava/lang/String;ZLjava/lang/NullPointerException;)V")).isEqualTo(methodSignature);
     }
 
     @Test
@@ -36,7 +36,7 @@ class MethodSignatureTest {
         MethodSignature methodSignature = new MethodSignature(
                 "([Ljava/lang/String;Z[Ljava/lang/NullPointerException;)V", "LZL", 'V'
         );
-        assertThat(MethodSignature.parseSignature("([Ljava/lang/String;Z[Ljava/lang/NullPointerException;)V")).isEqualTo(methodSignature);
+        assertThat(MethodSignature.parse("([Ljava/lang/String;Z[Ljava/lang/NullPointerException;)V")).isEqualTo(methodSignature);
     }
 
     @Test
@@ -44,7 +44,7 @@ class MethodSignatureTest {
         MethodSignature methodSignature = new MethodSignature(
                 "()Ljava/lang/String;", "", 'L'
         );
-        assertThat(MethodSignature.parseSignature("()Ljava/lang/String;")).isEqualTo(methodSignature);
+        assertThat(MethodSignature.parse("()Ljava/lang/String;")).isEqualTo(methodSignature);
     }
 
 }

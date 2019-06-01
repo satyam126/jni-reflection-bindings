@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 @ToString
@@ -17,6 +19,8 @@ public class MethodSignature {
     private static final Pattern objectTypePattern = Pattern.compile("L.+?;");
     private static final Pattern arrayPattern = Pattern.compile("\\[[LBCDFIJSZ]");
 
+    private static final Map<String, MethodSignature> cache = new ConcurrentHashMap<>();
+
     @Getter
     private final String signature;
 
@@ -26,7 +30,17 @@ public class MethodSignature {
     @Getter
     private final char returnType;
 
-    public static MethodSignature parseSignature(String signature) {
+    public static MethodSignature fetch(String signature) {
+        if (cache.containsKey(signature)) {
+            return cache.get(signature);
+        } else {
+            var methodSignature = MethodSignature.parse(signature);
+            cache.put(signature, methodSignature);
+            return methodSignature;
+        }
+    }
+
+    public static MethodSignature parse(String signature) {
         var desugaredSignature = transformArraysToObjects(truncateObjectTypes(signature));
         var signatureMatcher = signaturePattern.matcher(desugaredSignature);
 
